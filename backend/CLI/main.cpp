@@ -1,4 +1,5 @@
 #include <iostream>
+#include "report_spot.h"
 using namespace std;
 
 void showMenu() {
@@ -21,7 +22,8 @@ int main() {
 
         switch (choice) {
             case 1:
-                cout << "Report Waste Spot\n";
+                ReportSpot report;
+                report.reportSpot();
                 break;
 
             case 2:

@@ -3,16 +3,10 @@
 
 #include "waste_spot.h"
 
-class ReportSpot {
+class ReportSpot
+{
 public:
-    void reportSpot(
-        int reporterID,
-        double latitude,
-        double longitude,
-        const char photoPath[],
-        const char wasteType[],
-        WasteSize estimatedSize
-    );
+    void reportSpot();
 };
 
 #endif

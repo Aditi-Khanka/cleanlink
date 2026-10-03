@@ -1,19 +1,71 @@
-#include "report_spot.h"
+#include "../api/reverse_geocode.h"
+#include "../include/report_spot.h"
+#include <iostream>
 #include <cstring>
 
-// Report a new waste spot
-void ReportSpot::reportSpot(
-    int reporterID,
-    double latitude,
-    double longitude,
-    const char photoPath[],
-    const char wasteType[],
-    WasteSize estimatedSize
-)
+using namespace std;
+
+void ReportSpot::reportSpot()
 {
+    int reporterID;
+    double latitude;
+    double longitude;
+
+    char photoPath[200];
+    char wasteType[50];
+
+    int sizeChoice;
+    WasteSize estimatedSize;
+
+    cout << "\n===== REPORT WASTE SPOT =====\n";
+
+    cout << "Enter Reporter ID: ";
+    cin >> reporterID;
+
+    cout << "Enter Latitude: ";
+    cin >> latitude;
+
+    cout << "Enter Longitude: ";
+    cin >> longitude;
+
+    Location location = reverseGeocode(latitude, longitude);
+    cout << "\nLocation found:\n";
+    cout << "City: " << location.cityName << endl;
+    cout << "Locality: " << location.localityName << endl;
+
+    cout << "Enter Photo Path: ";
+    cin >> photoPath;
+
+    cout << "Enter Waste Type: ";
+    cin >> wasteType;
+
+    cout << "\nSelect Waste Size:\n";
+    cout << "1. Small\n";
+    cout << "2. Medium\n";
+    cout << "3. Large\n";
+    cout << "Enter choice: ";
+    cin >> sizeChoice;
+
+    if (sizeChoice == 1)
+    {
+        estimatedSize = SMALL;
+    }
+    else if (sizeChoice == 2)
+    {
+        estimatedSize = MEDIUM;
+    }
+    else if (sizeChoice == 3)
+    {
+        estimatedSize = LARGE;
+    }
+    else
+    {
+        cout << "Invalid size choice.\n";
+        return;
+    }
+
     WasteSpot spot;
 
-    // Store basic spot information
     spot.reporterID = reporterID;
     spot.latitude = latitude;
     spot.longitude = longitude;
@@ -21,20 +73,13 @@ void ReportSpot::reportSpot(
     strcpy(spot.photoPath, photoPath);
     strcpy(spot.wasteType, wasteType);
 
-    // Store estimated size and initial status
     spot.estimatedSize = estimatedSize;
     spot.status = PENDING;
 
-    // Initialize linked list of waste spots
     spot.next = NULL;
-
-    // Initialize Applicant Linked List
     spot.applicantHead = NULL;
-
-    // Initialize assigned workers
     spot.assignedCount = 0;
 
-    // Assign initial worker limit according to waste size
     if (estimatedSize == SMALL)
     {
         spot.workerLimit = 2;
@@ -47,4 +92,6 @@ void ReportSpot::reportSpot(
     {
         spot.workerLimit = 10;
     }
+
+    cout << "\nWaste spot reported successfully!\n";
 }
