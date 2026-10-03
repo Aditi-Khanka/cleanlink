@@ -33,6 +33,17 @@ void ReportSpot::reportSpot()
     cout << "City: " << location.cityName << endl;
     cout << "Locality: " << location.localityName << endl;
 
+    int cityIndex = cityTable.searchCity(location.cityName);
+
+    if (cityIndex == -1)
+    {
+        cityTable.insertCity(location.cityName);
+    }
+    else
+    {
+        cout << "City already exists in City Hash Table.\n";
+    }
+
     cout << "Enter Photo Path: ";
     cin >> photoPath;
 

@@ -15,14 +15,15 @@ void showMenu() {
 
 int main() {
     int choice;
+    ReportSpot report;
 
     do {
         showMenu();
         cin >> choice;
-
+        
         switch (choice) {
             case 1:
-                ReportSpot report;
+                
                 report.reportSpot();
                 break;
 
