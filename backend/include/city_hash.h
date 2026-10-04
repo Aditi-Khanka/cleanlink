@@ -16,11 +16,19 @@ class CityHashTable
 {
 private:
     City table[SIZE];
+    int nextCityID;
 
 public:
+    CityHashTable();
+
     int hashFunction(string name);
-    void insertCity(int id, string name);
+
+    void insertCity(string name);
+
     int searchCity(string name);
+
+    int getCityID(string name);
+
     void display();
 };
 
