@@ -29,6 +29,10 @@ typedef struct WasteSpot
     double latitude;
     double longitude;
 
+    // Filled by reverse geocoding
+    char cityName[100];
+    char localityName[100];
+
     char photoPath[200];
     char wasteType[50];
 
