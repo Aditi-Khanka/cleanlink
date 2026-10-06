@@ -1,5 +1,6 @@
 #include <iostream>
 #include "report_spot.h"
+#include "spot_list.h"
 using namespace std;
 
 void showMenu() {
@@ -16,6 +17,9 @@ void showMenu() {
 int main() {
     int choice;
     ReportSpot report;
+    SpotList spots;
+
+    spots.loadFromFile();
 
     do {
         showMenu();
@@ -24,11 +28,11 @@ int main() {
         switch (choice) {
             case 1:
                 
-                report.reportSpot();
+                report.reportSpot(spots);
                 break;
 
             case 2:
-                cout << "View Waste Spots\n";
+                spots.display();
                 break;
 
             case 3:

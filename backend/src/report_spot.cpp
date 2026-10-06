@@ -5,7 +5,7 @@
 
 using namespace std;
 
-void ReportSpot::reportSpot()
+void ReportSpot::reportSpot(SpotList &spots)
 {
     int reporterID;
     double latitude;
@@ -75,11 +75,14 @@ void ReportSpot::reportSpot()
         return;
     }
 
-    WasteSpot spot;
+    WasteSpot spot = {};
 
     spot.reporterID = reporterID;
     spot.latitude = latitude;
     spot.longitude = longitude;
+
+    strncpy(spot.cityName, location.cityName.c_str(), sizeof(spot.cityName) - 1);
+    strncpy(spot.localityName, location.localityName.c_str(), sizeof(spot.localityName) - 1);
 
     strcpy(spot.photoPath, photoPath);
     strcpy(spot.wasteType, wasteType);
@@ -104,5 +107,7 @@ void ReportSpot::reportSpot()
         spot.workerLimit = 10;
     }
 
-    cout << "\nWaste spot reported successfully!\n";
+    int spotID = spots.addSpot(spot);
+
+    cout << "\nWaste spot #" << spotID << " reported successfully!\n";
 }

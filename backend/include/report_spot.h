@@ -3,6 +3,7 @@
 
 #include "waste_spot.h"
 #include "city_hash.h"
+#include "spot_list.h"
 
 class ReportSpot
 {
@@ -10,7 +11,7 @@ private:
     CityHashTable cityTable;
 
 public:
-    void reportSpot();
+    void reportSpot(SpotList &spots);
 };
 
 #endif
