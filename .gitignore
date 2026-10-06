@@ -1,0 +1,14 @@
+# Build output
+/cleanlink
+/cleanlink.exe
+backend/main
+*.o
+*.out
+
+# Saved app data (each machine keeps its own)
+*.dat
+
+# OS / editor
+.DS_Store
+.vscode/
+.idea/
