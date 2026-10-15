@@ -1,27 +1,50 @@
 #ifndef LOCALITY_HASH_H
 #define LOCALITY_HASH_H
 
-#include <string>
-using namespace std;
-
 const int SIZE = 10;
 
+// WasteSpot should be defined in your existing project
+struct WasteSpot;
+
+// Structure for one locality
 struct Locality
 {
     int id;
-    string name;
+    char name[10];
+
+    double minLat;
+    double maxLat;
+    double minLon;
+    double maxLon;
+
+    int localityScore;
+
+    WasteSpot* spotHead;
 };
 
+// Locality Hash Table
 class LocalityHashTable
 {
 private:
     Locality table[SIZE];
+    int nextLocalityID;
+
+    int hashFunction(const char name[]);
 
 public:
-    int hashFunction(string name);
-    void insertLocality(int id, string name);
-    int searchLocality(string name);
-    void display();
+    LocalityHashTable();
+
+    int searchLocality(const char name[]);
+
+    int insertLocality(
+        const char name[],
+        double minLat,
+        double maxLat,
+        double minLon,
+        double maxLon
+    );
+
+    void displayLocalities();
 };
 
 #endif
